@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+<!-- Теги -->
+{% with recipe.tags.all as tags %}
+{% if tags %}
+<ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in tags %}
+    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ recipe.title }}</h1>
+
+{% if recipe.photo %}
+<p><img class="img-article-left" src="{{ recipe.photo.url }}"></p>
+{% endif %}
+
+{{ recipe.description|linebreaks }}
+
+<h2>Продукты</h2>
+{{ recipe.ingredients|linebreaks }}
+
+<h2>Пошаговый рецепт</h2>
+{{ recipe.cooking_steps|linebreaks }}
+
+<h4>Время приготовления</h4>
+{{ recipe.cooking_time|linebreaks }}
+
+<h4>Автор</h4>
+{{ recipe.author|linebreaks }}
+
+{% endblock %}
